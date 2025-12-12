@@ -1,21 +1,9 @@
 import {mongoose , Schema} from "mongoose";
 import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt"
 
 
 const UserSchema = new Schema(
     {
-
-        username :{
-            type:String,
-            required : true,
-            unique : true,
-            lowercase:true,
-            trim:true,
-            index:true
-
-        },
-
         fullName: {
             type:String,
             required:true,
@@ -30,10 +18,13 @@ const UserSchema = new Schema(
             unique:true,
             
         },
+        isaFaculty:{
+            type:Boolean,
+            required:true
+        },
 
         avatar :{
-            type:String, 
-            required:true,
+            type:String,
 
         },
 
@@ -41,10 +32,10 @@ const UserSchema = new Schema(
             type:String
         },
 
-        watchHistory:[
+        projects :[
             {
-                type : Schema.Types.ObjectId,
-                ref : "Video"
+                type: Schema.Types.ObjectId,
+                ref : "Project"
             }
         ],
 
@@ -76,6 +67,7 @@ const UserSchema = new Schema(
 // should be ideally be used then enable this
 UserSchema.methods.isPasswordCorrect = async function(password){
     // return await bcrypt.compare(password, this.password)
+    console.log(password , this.password)
     return password === this.password
 }
 

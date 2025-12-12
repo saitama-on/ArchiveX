@@ -9,7 +9,7 @@ const app = express()
 //origin for allowed origin 
 //credentials are used for allowing to send credentials via http
 app.use(cors({
-    origin : process.env.CORS_ORIGIN ,
+    origin : "http://localhost:5173" ,
     credentials : true
 })) 
 //allow json
@@ -30,9 +30,9 @@ app.use(cookieParser())
 
 //routing
 import userRouter from "./routes/user.routes.js"
-import testRouter from "./routes/test.routes.js"
+import testRouter from "./routes/project.routes.js"
 app.use("/api/v1/users" , userRouter)
-app.use("/api/v1/tests" , testRouter)
+app.use("/api/v1/projects" , testRouter)
 
 
 

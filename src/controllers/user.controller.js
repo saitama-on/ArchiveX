@@ -2,6 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 import apiError from "../utils/apiError.js"
 import { apiResponse } from "../utils/apiResponse.js"
 import { User } from "../models/user.model.js"
+import {Project} from "../models/project.model.js"
 import jwt from "jsonwebtoken"
 import { uploadToCloudinary } from "../utils/cloudinary.js"
 
@@ -9,7 +10,8 @@ import { uploadToCloudinary } from "../utils/cloudinary.js"
 //if httpOnly and secure true , only sever can modify cookie
 const options ={
     httpOnly:true,
-    secure:true
+    secure:false,
+    sameSite:'lax'
 }
 
 
@@ -24,11 +26,12 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // 1. get details
     // console.log(req.body)
-    const { fullname, email, username, password } = req.body
+    const { fullname, email, password , isaFaculty} = req.body
+    console.log(email);
 
     // 2. checking for empty fields
     if (
-        [fullname, username, email, password].some((field) => {
+        [fullname, email, password].some((field) => {
             return field?.trim() === ""
         })
 
@@ -39,9 +42,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // 3. Check for duplicate emails or username 
 
-    const existingUser = await User.findOne({
-        $or: [{ username }, { email }]
-    })
+    const existingUser = await User.findOne({email})
 
     if (existingUser) {
         throw new apiError(400, "email or username already taken")
@@ -55,17 +56,17 @@ const registerUser = asyncHandler(async (req, res) => {
     console.log(avatarLocalPath)
 
 
-    if (!avatarLocalPath) {
-        throw new apiError(400, "Avatar image not found!!")
-    }
+    // if (!avatarLocalPath) {
+    //     throw new apiError(400, "Avatar image not found!!")
+    // }
 
     // //upload on cloudinary
     const avatar = await uploadToCloudinary(avatarLocalPath)
     const coverImage = await uploadToCloudinary(coverImageLocalPath)
 
-    if (!avatar) {
-        throw new apiError(400, "Avatar is required Field")
-    }
+    // if (!avatar) {
+    //     throw new apiError(400, "Avatar is required Field")
+    // }
 
     // //create new user
 
@@ -73,9 +74,9 @@ const registerUser = asyncHandler(async (req, res) => {
         fullName : fullname,
         email,
         password,
-        avatar: avatar.url,
+        isaFaculty,
+        avatar: avatar?.url || "",
         coverImage: coverImage?.url || "",
-        username: username.toLowerCase()
 
     })
 
@@ -115,16 +116,15 @@ const loginUser = asyncHandler(async(req,res)=>{
     //send cookies 
 
     //1
-    const {username , email , password} = req.body
+    const { email , password} = req.body
+    console.log(req.body)
 
-    if(!(username || email)){
+    if(!( email)){
         throw new apiError(400 , "username or email required")
     }
 
     //2
-    const user = await User.findOne({
-        $or: [{username} , {email}]
-    })
+    const user = await User.findOne( {email})
 
     if(!user){
         throw new apiError(400 , "no account with this email or username")
@@ -177,10 +177,6 @@ const logoutUser = asyncHandler(async(req,res)=>{
                 }
             }
         )
-
-
-
-
 
         return res
         .status(200)
@@ -244,11 +240,86 @@ const refreshAccessToken = asyncHandler(async(req,res) =>{
 
 })
 
+const getAllUsers = asyncHandler(async(req,res)=>{
+
+    try{
+        const users = await User.find().select("fullName  _id isaFaculty");
+        return res.status(200).json(
+            new apiResponse(200 , users , "success")
+        );
 
 
+    }catch(error){
+        throw new apiError(400 , "Unable to get all users!")
+    }
+})
+
+
+const getUserInfoWithToken = asyncHandler(async(req,res)=>{
+
+    // console.log(req.user)
+    const userId = req.user._id;
+    // let userData = req.user
+
+
+    res.status(200).json(
+        new apiResponse(200 , req.user , "success")
+    );
+})
+
+//get public info
+const getUserInfo = asyncHandler(async(req,res)=>{
+
+    const userId  = req.query?.userId ? req.query.userId : req.user._id
+    console.log("this is usr" ,userId)
+    // console.log("userdi si " ,userId)
+    try{
+
+        const info  = await User.findById(userId)
+
+        res.status(200).json(new apiResponse(200, info ,"success"))
+    }
+    catch(error){
+        console.log(error)
+        throw new apiError(400 , "Can't get Info!")
+    }
+})
+
+const updateUserCoverImage = asyncHandler(async(req,res)=>{
+    // const {coverImage} = req.body
+    console.log(req.body)
+    console.log(req.user)
+    // console.log(req.file)
+
+    const coverImage_file = req.file;
+    const file_name = coverImage_file.filename;
+
+    const file_path = `/coverImages/${file_name}`;
+    const updates = {
+        'coverImage' : file_path
+    }
+
+    try{
+    const imageUpload = await User.findByIdAndUpdate(req.user._id , updates , {
+        runValidators:true,
+        new:true
+    });
+
+    res.status(200).json( new apiResponse(200 ,imageUpload , "Success!"))
+
+    }catch(err){
+        console.log(err)
+        throw new apiError(400 , "Couldn't upload image");
+    }
+
+})
 export {
         loginUser , 
         registerUser , 
         logoutUser ,
-        refreshAccessToken
+        refreshAccessToken,
+        getAllUsers,
+        getUserInfo,
+        getUserInfoWithToken,
+        updateUserCoverImage
     }
