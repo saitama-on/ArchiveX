@@ -177,7 +177,9 @@
   display: block;
   margin: 1rem 0;
 }
-
+.like-div:hover{
+  transform: translateY(-3px);
+}
 .custom-modal-body button:hover {
   background-color: #2857a4;
   transform: translateY(-2px);

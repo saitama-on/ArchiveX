@@ -1,8 +1,13 @@
 import { GrLike } from "react-icons/gr"
-
+import { AiOutlineMore } from "react-icons/ai";
+import '../styles/projectCard.css'
 
 export default function ProjectCard({project  , handleModal , findName}){
 
+    const handleOptionClick = (e)=>{
+        e.stopPropagation();
+        // alert('hioii')
+    }
     return (
         <div 
             key={project._id} 
@@ -10,7 +15,10 @@ export default function ProjectCard({project  , handleModal , findName}){
             onClick={()=> handleModal(project)}
             style={{ cursor: 'pointer' }}
             >
-            <h3>{project.title}</h3>
+            <div className='title-and-delete-div'>
+                <h2>{project.title}</h2>
+                <p onClick={(e) =>handleOptionClick(e)}><AiOutlineMore size={30}/></p>
+            </div>
             <p><strong>Research Area:</strong> {project.researchArea}</p>
             <p><strong>Semester:</strong> {project.semester}</p>
 
@@ -27,8 +35,9 @@ export default function ProjectCard({project  , handleModal , findName}){
                 >
                 View Report
                 </a>
-                <div style={{display:'flex' , justifyContent:'space-between' , alignItems:'center', cursor:'pointer'}}>
-                <GrLike/>
+                <div 
+                 style={{display:'flex' , justifyContent:'space-between' , alignItems:'center', cursor:'pointer'}}>
+                    <GrLike/>
                 <p style={{margin:'5px' , fontSize:'1rem'}}>{project.likes ? project.likes.length : 0}</p>
                 </div>
                 </div>

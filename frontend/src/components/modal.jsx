@@ -167,7 +167,7 @@ function InfoModal({ show, setShow, info , allUsers}) {
               </div>
               <div style={{display:'flex' , alignItems:'center'}}>
                 <p style={{marginRight:'10px'}}>Like this project</p>
-                <div onClick={handleLike} style={{cursor:'pointer'}}>
+                <div onClick={handleLike} style={{cursor:'pointer'}} className='like-div'>
                 {liked ? <AiFillLike color='#519fe9ff' size={30}/> : <AiFillLike color='grey' size={30}/>}
                 </div>
                 </div>

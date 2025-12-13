@@ -236,11 +236,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.project-card h3 {
-  margin: 0 0 1rem 0;
-  color: #333;
-  font-size: 1.2rem;
-}
+
 
 .project-card p {
   margin: 0.5rem 0;

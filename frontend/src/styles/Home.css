@@ -70,7 +70,10 @@
   background-color: #2196F3;
   color: white;
 }
-
+.projects-type-slider{
+  display: flex;
+  justify-content: space-around;
+}
 .manage-students-btn {
   background-color: #9C27B0;
   color: white;
@@ -149,28 +152,13 @@
   margin-top: 1rem;
 }
 
-.project-card {
-  background-color: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
+
+
+.title-and-delete-div p {
+  /* background-color: red; */
 }
 
-.project-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
 
-.project-card h3 {
-  margin: 0 0 1rem 0;
-  color: #333;
-}
-
-.project-card p {
-  margin: 0.5rem 0;
-  color: #666;
-}
 
 .view-file {
   display: inline-block;

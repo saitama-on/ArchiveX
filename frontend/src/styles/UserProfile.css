@@ -113,13 +113,6 @@
     padding: 2rem;
 }
 
-.projects-section h3 {
-    margin: 0 0 1.5rem 0;
-    color: #333;
-    font-size: 1.5rem;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 0.5rem;
-}
 
 .projects-grid {
     display: grid;
@@ -127,58 +120,7 @@
     gap: 1.5rem;
 }
 
-.project-card {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 1.5rem;
-    border: 1px solid #eee;
-}
 
-.project-card h4 {
-    margin: 0 0 1rem 0;
-    color: #316dcc;
-    font-size: 1.2rem;
-}
-
-.project-card p {
-    margin: 0.5rem 0;
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.project-card p strong {
-    color: #444;
-    font-weight: 600;
-}
-
-.team-members {
-    margin: 0.5rem 0;
-    line-height: 1.6;
-}
-
-.member-link {
-    color: #316dcc;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    padding: 2px 4px;
-    border-radius: 3px;
-}
-
-.member-link:hover {
-    background-color: rgba(49, 109, 204, 0.1);
-    text-decoration: underline;
-}
-
-.member-link.current-user {
-    background-color: #316dcc;
-    color: white;
-    cursor: default;
-}
-
-.member-link.current-user:hover {
-    text-decoration: none;
-}
 
 .view-report {
     display: inline-block;

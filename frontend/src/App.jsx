@@ -35,8 +35,9 @@ function App() {
         // setIsLoggedIn(false);
       }
       else{
+        console.log("no")
         setAuthUser(null);
-        navigate('/login')
+        navigate('/')
       }
     }
 

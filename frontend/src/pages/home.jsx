@@ -16,6 +16,7 @@ const Home = () => {
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [pendingApprovalSelected  , setPendingApprovalSelected] = useState(false)
   const navigate = useNavigate();
   const {authUser , setAuthUser,
     isLoggedIn , setIsLoggedIn
@@ -163,7 +164,17 @@ const Home = () => {
       </div>
 
       <div className="projects-section">
-        <h2>Your Projects</h2>
+        <div className="projects-type-slider">
+          <h2 style={{textDecoration:pendingApprovalSelected ? 'none' : 'underline',
+            cursor:'pointer' , textDecorationColor:pendingApprovalSelected ? 'none' : '#519fe9ff'
+          }} 
+          onClick={()=>setPendingApprovalSelected(false)}>Your Projects</h2>
+          <h2 style={{textDecoration:pendingApprovalSelected ? 'underline' : 'none',
+            cursor:'pointer',textDecorationColor:pendingApprovalSelected ? '#519fe9ff' : 'none'
+          }}
+          onClick={()=>setPendingApprovalSelected(true)}>Pending for Approval</h2>
+        </div>
+        
         {loading ? (
           <div className="loading">Loading projects...</div>
         ) : userProjects? (
@@ -175,7 +186,7 @@ const Home = () => {
         ) : (
           <div className="no-projects">
             <p>No projects found.</p>
-            <button  className="add-project-btn">
+            <button  className="add-project-btn" >
               Add Your First Project
             </button>
           </div>
