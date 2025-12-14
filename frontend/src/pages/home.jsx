@@ -34,18 +34,7 @@ const Home = () => {
         // return theName.fullName; 
     }
     useEffect(()=>{
-        
-
-        const fetchUsers = async()=>{
-            const response = await fetch('http://localhost:8000/api/v1/users/get-all-users',{
-                method:'GET'
-            });
-
-            const names = await response.json();
-            // console.log(names.data)
-            setAllUsers(names.data);
-        }
-
+      
         const fetchprojs = async()=>{
 
             try{
@@ -78,11 +67,21 @@ const Home = () => {
                 console.log(err);
             }
         }
-
-       
-        fetchUsers();
         fetchprojs();
     },[showModal]);
+
+    useEffect(()=>{
+      const fetchUsers = async()=>{
+            const response = await fetch('http://localhost:8000/api/v1/users/get-all-users',{
+                method:'GET'
+            });
+
+            const names = await response.json();
+            // console.log(names.data)
+            setAllUsers(names.data);
+        }
+        fetchUsers();
+    },[])
 
     useState(()=>{
        const fetchUserInfo = async()=>{

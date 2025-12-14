@@ -8,13 +8,10 @@ import { AiFillLike } from "react-icons/ai";
 import { useAuth } from '../context/AuthContext';
 
 
-
 function InfoModal({ show, setShow, info , allUsers}) {
  
-  const [file, setFile] = useState(null);
   const [liked , setLiked] = useState(false);
   const navigate = useNavigate();
-  const [showToast , setShowToast]  = useState(false);
   const {authUser}  = useAuth();
   // console.log(info)
 
@@ -33,10 +30,10 @@ function InfoModal({ show, setShow, info , allUsers}) {
   const notify_succ = (msg) => toast.success(msg);
 
   useEffect(()=>{
-    console.log(info);
-    console.log(authUser)
+    // console.log(info);
+    // console.log(authUser)
     if(info?.likes?.find(item => item == authUser._id)){
-      console.log('hel;')
+      // console.log('hel;')
       setLiked(true);
     }
     else{

@@ -1,11 +1,36 @@
 import { GrLike } from "react-icons/gr"
+import { useState } from "react";
 import { AiOutlineMore } from "react-icons/ai";
 import '../styles/projectCard.css'
+import { MdDeleteOutline } from "react-icons/md";
+import { MdOutlineEdit } from "react-icons/md";
+import { MdClose } from "react-icons/md";
 
+
+
+function Options({handleDelete}){
+
+  return(
+    <div className='options-main-div'>
+      <div className="options-main-div-item" onClick={handleDelete}>
+        <MdDeleteOutline color='red' size={25}/>
+      </div>
+      {/* <div className="options-main-div-item">
+        <MdOutlineEdit color='blue' size={25}/>
+      </div> */}
+    </div>
+  )
+}
 export default function ProjectCard({project  , handleModal , findName}){
-
+    const [showOptions , setShowOptions] = useState(false);
+    
+    const handleDelete = (e)=>{
+        e.stopPropagation();
+        alert("Are you sure??")
+    }
     const handleOptionClick = (e)=>{
         e.stopPropagation();
+        setShowOptions(prev =>!prev);
         // alert('hioii')
     }
     return (
@@ -17,8 +42,12 @@ export default function ProjectCard({project  , handleModal , findName}){
             >
             <div className='title-and-delete-div'>
                 <h2>{project.title}</h2>
-                <p onClick={(e) =>handleOptionClick(e)}><AiOutlineMore size={30}/></p>
+                <p onClick={(e) =>handleOptionClick(e)}>
+                    {showOptions ? <MdClose size={30}/> : <AiOutlineMore size={30}/>}
+                </p>
+                 
             </div>
+           {showOptions && <Options handleDelete={handleDelete}/>}
             <p><strong>Research Area:</strong> {project.researchArea}</p>
             <p><strong>Semester:</strong> {project.semester}</p>
 
