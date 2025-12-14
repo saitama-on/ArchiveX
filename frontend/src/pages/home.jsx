@@ -83,26 +83,6 @@ const Home = () => {
         fetchUsers();
     },[])
 
-    useState(()=>{
-       const fetchUserInfo = async()=>{
-
-        try{
-          const response = await fetch("http://localhost:8000/api/v1/users/get-user-info",{
-            method:'GET',
-            credentials:'include'
-          });
-
-          const data = await response.json();
-          console.log(data);
-          setAuthUser(data.data);
-        }catch(err){
-          setAuthUser(null);
-          navigate('/login')
-        }
-        }
-        
-        fetchUserInfo();
-    }, [authUser])
 
     const handleModal = (proj)=>{
         setShowModal(true);
@@ -178,8 +158,8 @@ const Home = () => {
           <div className="loading">Loading projects...</div>
         ) : userProjects? (
           <div className="projects-grid">
-            {userProjects.map(project => (
-              <ProjectCard project={project} handleModal={handleModal} findName={findName}/>
+            {userProjects.map((project ,key) => (
+              <ProjectCard key={key} project={project} handleModal={handleModal} findName={findName}/>
             ))}
           </div>
         ) : (

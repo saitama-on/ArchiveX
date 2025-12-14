@@ -8,25 +8,37 @@ import { MdClose } from "react-icons/md";
 
 
 
-function Options({handleDelete}){
+function Options({handleOptions}){
 
   return(
     <div className='options-main-div'>
-      <div className="options-main-div-item" onClick={handleDelete}>
+      <div className="options-main-div-item" name="delete" onClick={handleOptions}>
         <MdDeleteOutline color='red' size={25}/>
       </div>
-      {/* <div className="options-main-div-item">
+      <div className="options-main-div-item" name="edit" onClick={handleOptions}>
         <MdOutlineEdit color='blue' size={25}/>
-      </div> */}
+      </div>
     </div>
   )
 }
 export default function ProjectCard({project  , handleModal , findName}){
     const [showOptions , setShowOptions] = useState(false);
     
-    const handleDelete = (e)=>{
+    const handleOptions = (e)=>{
         e.stopPropagation();
-        alert("Are you sure??")
+        const option = e.currentTarget.getAttribute('name');
+
+        //delete
+        if(option == 'delete'){
+            //popup modal for delete 
+        }
+        else{
+            //poup modal for edit
+            alert("working on this!!!")
+        }
+
+        
+        // alert(e.target.name)
     }
     const handleOptionClick = (e)=>{
         e.stopPropagation();
@@ -47,7 +59,7 @@ export default function ProjectCard({project  , handleModal , findName}){
                 </p>
                  
             </div>
-           {showOptions && <Options handleDelete={handleDelete}/>}
+           {showOptions && <Options handleOptions={handleOptions}/>}
             <p><strong>Research Area:</strong> {project.researchArea}</p>
             <p><strong>Semester:</strong> {project.semester}</p>
 
