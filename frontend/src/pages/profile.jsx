@@ -5,6 +5,7 @@ import { ThreeDot } from 'react-loading-indicators';
 import InfoModal from '../components/modal.jsx'
 import { useAuth } from '../context/AuthContext.jsx';
 import ProjectCard from '../components/projectCard.jsx';
+import ConfirmDelete from '../components/confirmDelete.jsx';
 
 function ImageModal({setImageModal}){
 
@@ -57,6 +58,7 @@ function ImageModal({setImageModal}){
 
 function UserProfile() {
     const [userProfile, setUserProfile] = useState(null);
+    const [selectedProject , setSelectedProject]  = useState(null);
     const [allUsers , setAllUsers]= useState(null);
     const [show , setShow] = useState(false);
     const [info  , setInfo] = useState([]);
@@ -66,6 +68,8 @@ function UserProfile() {
     const navigate = useNavigate();
     const {authUser} = useAuth();
     const {userId} = useParams();
+    const [showDeleteModal , setShowDeleteModal] = useState(false);
+
     // console.log(userId)
 
 
@@ -187,19 +191,29 @@ function UserProfile() {
                     <h3>Projects</h3>
                     <div className="projects-grid">
                         {userProjects?.map((project, index) => (
-                            <ProjectCard project={project} handleModal={handleProjClick} findName={findName} />
+                            <ProjectCard project={project} 
+                            handleModal={handleProjClick}
+                             findName={findName} 
+                             setSelectedProject={setSelectedProject}
+                             setShowDeleteModal={setShowDeleteModal}/>
                         ))}
                     </div>
                 </div>
             </div>
             {show && (
-        <InfoModal
-          show={show}
-          setShow={setShow}
-          info={info}
-          allUsers={allUsers}
-        />
+                <InfoModal
+                show={show}
+                setShow={setShow}
+                info={info}
+                allUsers={allUsers}
+                />
              )}
+
+            {
+                showDeleteModal && 
+                <ConfirmDelete setShowDeleteModal={setShowDeleteModal}
+                selectedProject={selectedProject}/>
+            }
 
              {imageModal && <ImageModal setImageModal={setImageModal}/>}
         </div>

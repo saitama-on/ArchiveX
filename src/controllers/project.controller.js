@@ -117,10 +117,30 @@ const updateLike = asyncHandler(async(req,res)=>{
     }
 })
 
+const deleteProject = asyncHandler(async(req,res)=>{
+    const projId = req.query.id;
+    console.log("query" , req.query)
+    const receivedPassword = req.body.password;
+    const actualPassword = req.user.password
+    // console.log(req.user)
+    //check if password matches with req.user
+    if(receivedPassword != actualPassword){
+        return res.status(401).json({message:'Incorrect Password!'})
+    }
+    //password is correct
+    //find the project and remove it
+    console.log(projId)
+    const findProj = await Project.deleteOne({_id:projId});
+    console.log(findProj)
+    return res.status(200).json({message:'Deleted Project Successfully!'})
+
+})
+
 export {
     createNewProject,
     getAllProjects,
     getCurrentUserProjects,
     getOtherUserProjects,
-    updateLike
+    updateLike,
+    deleteProject
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Home.css';
 import InfoModal from '../components/modal';
+import ConfirmDelete from '../components/confirmDelete';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../context/AuthContext';
@@ -18,6 +19,8 @@ const Home = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [pendingApprovalSelected  , setPendingApprovalSelected] = useState(false)
   const navigate = useNavigate();
+  const [showDeleteModal , setShowDeleteModal] = useState(false);
+  const [deleteProjId , setDeleteProjId] = useState(null);
   const {authUser , setAuthUser,
     isLoggedIn , setIsLoggedIn
   } = useAuth();
@@ -159,7 +162,13 @@ const Home = () => {
         ) : userProjects? (
           <div className="projects-grid">
             {userProjects.map((project ,key) => (
-              <ProjectCard key={key} project={project} handleModal={handleModal} findName={findName}/>
+              <ProjectCard 
+              key={key}
+              project={project} 
+              handleModal={handleModal} 
+              findName={findName}
+              setShowDeleteModal={setShowDeleteModal}
+              setSelectedProject={setSelectedProject}/>
             ))}
           </div>
         ) : (
@@ -180,6 +189,12 @@ const Home = () => {
           allUsers = {allUsers}
         />
       )}
+
+      {
+        showDeleteModal && 
+        <ConfirmDelete setShowDeleteModal={setShowDeleteModal}
+         selectedProject={selectedProject}/>
+      }
       <ToastContainer position="top-center" />
     </div>
     

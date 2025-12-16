@@ -13,11 +13,11 @@
   animation: fadeIn 0.3s ease;
 }
 
-.project-custom-modal {
+.custom-modal {
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgb(71, 70, 70);
-  width: 80%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 40%;
   max-height: 100vh;
   overflow-y: auto;
   animation: slideIn 0.3s ease;
@@ -25,6 +25,30 @@
   padding: 0;
 }
 
+.password-and-delete-div{
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+}
+
+.password-and-delete-div input{
+    flex:1;
+    height: 2rem;
+    border:none;
+    margin: 5px;
+    font-size: 1rem;
+}
+
+.close-heading-and-button{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#close-btn-div:hover{
+    cursor: pointer;
+    background-color: #c1c1c1;
+}
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -68,10 +92,16 @@
   transform: scale(1.1);
 }
 
-.project-custom-modal-body {
+.custom-modal-body {
   padding: 0 1.5rem 1.5rem 1.5rem;
   /* background-color: black; */
   display: flex;
+  flex-direction: column;
+}
+
+.custom-modal-body p {
+    padding:5px;
+    font-size: 1.2rem;
 }
 .left-modal-body{
   flex:1;
@@ -166,22 +196,24 @@
 }
 
 .custom-modal-body button {
-  background-color: #316dcc;
+  background-color:#e72525;
   color: white;
   border: none;
-  padding: 0.8rem 1.5rem;
+  width:25%;
+  font-size: 1.3rem;
+  padding: 5px;
   border-radius: 6px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   display: block;
-  margin: 1rem 0;
+  margin-left: auto;
 }
 .like-div:hover{
   transform: translateY(-3px);
 }
 .custom-modal-body button:hover {
-  background-color: #2857a4;
+  background-color: #e73535;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(49, 109, 204, 0.2);
 }

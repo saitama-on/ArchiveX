@@ -21,16 +21,19 @@ function Options({handleOptions}){
     </div>
   )
 }
-export default function ProjectCard({project  , handleModal , findName}){
+export default function ProjectCard({project  , handleModal , findName , setShowDeleteModal , setSelectedProject}){
     const [showOptions , setShowOptions] = useState(false);
     
     const handleOptions = (e)=>{
         e.stopPropagation();
         const option = e.currentTarget.getAttribute('name');
+        setSelectedProject(project)
 
         //delete
         if(option == 'delete'){
-            //popup modal for delete 
+            //popup modal for delete
+            // console.log("del")
+            setShowDeleteModal(true) 
         }
         else{
             //poup modal for edit

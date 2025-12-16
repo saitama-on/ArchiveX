@@ -21,6 +21,12 @@ const Login = () => {
   //   }
   // }, [isLoggedIn]);
 
+  useEffect(()=>{
+    if(authUser){
+      navigate('/home')
+    }
+  })
+
 
   const handleLogin = async (e) => {
     e.preventDefault();

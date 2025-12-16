@@ -18,7 +18,7 @@ const verifyJWT = asyncHandler(async(req , res , next ) =>{
         const decodedInfo = await jwt.verify(token , process.env.ACCESS_TOKEN_SECRET)
     
         const user = await User.findById(decodedInfo?._id).
-        select("-password -refreshToken")
+        select("-refreshToken")
 
         // console.log("this uyser is loging out " , user);
         

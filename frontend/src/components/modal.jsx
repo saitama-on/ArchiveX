@@ -100,7 +100,7 @@ function InfoModal({ show, setShow, info , allUsers}) {
   return (
     <>
       <div className="custom-modal-overlay" onClick={handleClose}>
-        <div className="custom-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="project-custom-modal" onClick={(e) => e.stopPropagation()}>
           <div className="custom-modal-header">
             <button className="close-button" onClick={handleClose}>
               &times;
@@ -112,7 +112,7 @@ function InfoModal({ show, setShow, info , allUsers}) {
               <ThreeDot color="#316dcc" size="medium" text="" textColor="" />
             </div>
           ) : (
-          <div className="custom-modal-body">
+          <div className="project-custom-modal-body">
             <div className='left-modal-body'>
               <div className="inside-modal-div">
                 <span className="span-text">Title of Project:</span>
