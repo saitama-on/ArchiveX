@@ -10,7 +10,7 @@ import { uploadToCloudinary } from "../utils/cloudinary.js"
 //if httpOnly and secure true , only sever can modify cookie
 const options ={
     
-    secure:false,
+    secure:true,
     sameSite:'none'
 }
 
