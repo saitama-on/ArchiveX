@@ -99,11 +99,9 @@ const Login = () => {
             </button>
           </form>
           {error && <div className="error-message">{error}</div>}
-          {/* <p>
-            Don't have an account? <a href="/signup">Sign up</a>
-          </p> */}
-
-          <p>Demo credentials -- email: mia@gmail.com  , password : mia</p>
+          <p>
+            Already have an account? <a href="/login">Sign up</a>
+          </p>
         </div>
       </div>
     </div>
