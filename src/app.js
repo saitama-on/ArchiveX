@@ -5,11 +5,11 @@ import cookieParser from "cookie-parser";
 
 const app = express()
 //used for cross origin policy of browsers
-
+app.set("trust proxy", 1);
 //origin for allowed origin 
 //credentials are used for allowing to send credentials via http
 app.use(cors({
-    origin : ["https://archivex-frontend.onrender.com/" ,"http://localhost:5173"],
+    origin : ["https://archivex-front.onrender.com/" , "https://archivex-frontend.onrender.com/" , "https://archivex-front.onrender.com" , "https://archivex-frontend.onrender.com" ,"http://localhost:5173"],
     credentials : true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
