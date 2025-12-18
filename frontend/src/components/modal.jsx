@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { GrLike } from 'react-icons/gr';
 import { AiFillLike } from "react-icons/ai";
 import { useAuth } from '../context/AuthContext';
-
+import { API_URL } from '../const.js';
 
 function InfoModal({ show, setShow, info , allUsers}) {
  
@@ -60,7 +60,7 @@ function InfoModal({ show, setShow, info , allUsers}) {
     const updateLikeFetch = async(del)=>{
 
       try{
-        const response = await fetch(`http://localhost:8000/api/v1/projects/update-like?projectId=${info._id}`,{
+        const response = await fetch(`${API_URL}/api/v1/projects/update-like?projectId=${info._id}`,{
           method:'POST',
           credentials:'include',
           headers:{
@@ -174,10 +174,10 @@ function InfoModal({ show, setShow, info , allUsers}) {
               {info.projLink ? (
                 <div className='main-preview-div'>
                   <span className="span-text">Report</span>
-                  <a href={`http://localhost:8000/${info.projLink}`} target="_blank" rel="noopener noreferrer">View Report</a>
+                  <a href={`${API_URL}/${info.projLink}`} target="_blank" rel="noopener noreferrer">View Report</a>
                   <div className='preview-report-div'>
                     <iframe
-                    src={`http://localhost:8000/${info.projLink}`}
+                    src={`${API_URL}/${info.projLink}`}
                     title=" Preview"
                     width="100%"
                     height="100%"

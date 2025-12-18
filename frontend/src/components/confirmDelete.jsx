@@ -3,6 +3,7 @@ import { MdClose } from "react-icons/md";
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../const.js';
 
 
 
@@ -32,7 +33,7 @@ export default function ConfirmDelete({setShowDeleteModal , selectedProject}){
         console.log('deleting...')
         try{
             
-        const response = await fetch(`http://localhost:8000/api/v1/projects/delete-this-project?id=${selectedProject._id}`,{
+        const response = await fetch(`${API_URL}/api/v1/projects/delete-this-project?id=${selectedProject._id}`,{
             method:'DELETE',
             credentials:'include',
             headers:{

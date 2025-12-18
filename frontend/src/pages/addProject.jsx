@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import '../styles/addProject.css';
 import { useAuth } from '../context/AuthContext';
+import { API_URL } from '../const.js';
 
 const AddProject = () => {
   const {authUser
@@ -32,7 +33,7 @@ const AddProject = () => {
   useEffect(() => {
     
   const fetchUsers = async()=>{
-        const response = await fetch('http://localhost:8000/api/v1/users/get-all-users',{
+        const response = await fetch(`${API_URL}/api/v1/users/get-all-users`,{
             method:'GET'
         });
 
@@ -153,7 +154,7 @@ const AddProject = () => {
     const sendData = async()=>{
       try {
 
-        const response = await fetch("http://localhost:8000/api/v1/projects/create-new-project",{
+        const response = await fetch(`${API_URL}/api/v1/projects/create-new-project`,{
           method:'POST',
           credentials:'include',
           body:formDataToSend

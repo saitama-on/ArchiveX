@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../context/AuthContext';
 import { GrLike } from "react-icons/gr";
 import ProjectCard from '../components/projectCard';
+import { API_URL } from '../const';
 
 
 const Home = () => {
@@ -41,7 +42,7 @@ const Home = () => {
         const fetchprojs = async()=>{
 
             try{
-            const response = await fetch('http://localhost:8000/api/v1/projects/get-user-projects',{
+            const response = await fetch(`${API_URL}/api/v1/projects/get-user-projects`,{
                 method:'GET',
                 credentials:'include',
                 headers:{
@@ -75,7 +76,7 @@ const Home = () => {
 
     useEffect(()=>{
       const fetchUsers = async()=>{
-            const response = await fetch('http://localhost:8000/api/v1/users/get-all-users',{
+            const response = await fetch(`${API_URL}/api/v1/users/get-all-users`,{
                 method:'GET'
             });
 
@@ -94,7 +95,7 @@ const Home = () => {
 
     const handleLogout = async()=>{
         try{
-            const response = await fetch('http://localhost:8000/api/v1/users/logout' ,{
+            const response = await fetch(`${API_URL}/api/v1/users/logout` ,{
                 method:'POST',
                 credentials:'include',
                 headers:{

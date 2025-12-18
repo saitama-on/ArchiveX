@@ -6,6 +6,7 @@ import InfoModal from '../components/modal.jsx'
 import { useAuth } from '../context/AuthContext.jsx';
 import ProjectCard from '../components/projectCard.jsx';
 import ConfirmDelete from '../components/confirmDelete.jsx';
+import { API_URL } from '../const.js';
 
 function ImageModal({setImageModal}){
 
@@ -26,7 +27,7 @@ function ImageModal({setImageModal}){
         formData.append('coverImage' , imageFile);
 
         try{
-            const response = await fetch('http://localhost:8000/api/v1/users/update-user-coverImage',{
+            const response = await fetch(`${API_URL}/api/v1/users/update-user-coverImage`,{
                 method:'POST',
                 credentials:'include',
                 body:formData
@@ -86,7 +87,7 @@ function UserProfile() {
         // console.log(userId)
         const fetchProjs = async()=>{
             try{
-                const response = await fetch(`http://localhost:8000/api/v1/projects/get-other-user-projects?userId=${userId}` , {
+                const response = await fetch(`${API_URL}/api/v1/projects/get-other-user-projects?userId=${userId}` , {
                     method:'GET',
                     headers:{
                         "Content-Type":"application-json"
@@ -104,7 +105,7 @@ function UserProfile() {
             }
         }
         const fetchUsers = async()=>{
-            const response = await fetch('http://localhost:8000/api/v1/users/get-all-users',{
+            const response = await fetch(`${API_URL}/api/v1/users/get-all-users`,{
                 method:'GET'
             });
 
@@ -114,7 +115,7 @@ function UserProfile() {
         }
         const fetchProfile = async()=>{
             try{
-                const response = await fetch(`http://localhost:8000/api/v1/users/get-user-info?userId=${userId}`,{
+                const response = await fetch(`${API_URL}/api/v1/users/get-user-info?userId=${userId}`,{
                     method:'GET',
                     credentials:'include',
                     headers:{
@@ -174,7 +175,7 @@ function UserProfile() {
                 <div className="profile-header-main">
                     <div className="profile-avatar-div">
                         <div className='profile-avatar-large'>
-                            <img src={`http://localhost:8000/${userProfile?.coverImage}`|| null}></img>
+                            <img src={`${API_URL}/${userProfile?.coverImage}`|| null}></img>
                         </div>
                         
                         {authUser?._id == userProfile?._id &&  <button onClick={handleImageChange}>edit image</button>} 

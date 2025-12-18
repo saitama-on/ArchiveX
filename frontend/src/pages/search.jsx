@@ -5,6 +5,7 @@ import InfoModal from "../components/modal.jsx"
 import { useNavigate } from 'react-router-dom';
 import {ThreeDot} from 'react-loading-indicators';
 import { AiFillLike } from "react-icons/ai";
+import { API_URL } from '../const.js';
 
 
 
@@ -36,7 +37,7 @@ export default function Search() {
         const fetchprojs = async()=>{
 
             try{
-            const response = await fetch('http://localhost:8000/api/v1/projects/get-all-projects',{
+            const response = await fetch(`${API_URL}/api/v1/projects/get-all-projects`,{
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json'
@@ -54,7 +55,7 @@ export default function Search() {
             }
             }
         const fetchUsers = async()=>{
-            const response = await fetch('http://localhost:8000/api/v1/users/get-all-users',{
+            const response = await fetch(`${API_URL}/api/v1/users/get-all-users`,{
                 method:'GET'
             });
 

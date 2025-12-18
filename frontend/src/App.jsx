@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 import UserProfile from "./pages/profile.jsx";
 import Search from "./pages/search.jsx";
 import AddProject from "./pages/addProject.jsx"
+import { API_URL } from "./const.js";
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
 
   useEffect(()=>{
     const verifyUser = async()=>{
-      const response = await fetch('http://localhost:8000/api/v1/users/verifyUser',{
+      const response = await fetch(`${API_URL}/api/v1/users/verifyUser`,{
         method:'GET',
         credentials:'include'
       });

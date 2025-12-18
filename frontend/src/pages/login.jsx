@@ -3,7 +3,7 @@ import "../styles/login.css"; // Optional: Add your own styles
 import IceBear from "../assets/iceBear1.jpg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-
+import { API_URL } from "../const.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -41,7 +41,7 @@ const Login = () => {
     // }
 
     try {
-      const userCredential = await fetch('http://localhost:8000/api/v1/users/login',{
+      const userCredential = await fetch(`${API_URL}/api/v1/users/login`,{
         method:'POST',
         credentials:'include',
         headers:{
