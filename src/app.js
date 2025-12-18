@@ -10,7 +10,9 @@ const app = express()
 //credentials are used for allowing to send credentials via http
 app.use(cors({
     origin : "http://localhost:5173" ,
-    credentials : true
+    credentials : true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 })) 
 //allow json
 app.use(express.json()) //can have many options like {limit :"16kb"}

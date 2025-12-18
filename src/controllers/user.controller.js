@@ -11,7 +11,7 @@ import { uploadToCloudinary } from "../utils/cloudinary.js"
 const options ={
     
     secure:false,
-    sameSite:'lax'
+    sameSite:'none'
 }
 
 
