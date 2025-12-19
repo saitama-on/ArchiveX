@@ -74,6 +74,11 @@
   display: flex;
   justify-content: space-around;
 }
+
+.projects-type-slider h2:hover{
+  transform: scale3d(1.2 , 1.2 , 1.2);
+  transition-duration: 0.5s ;
+}
 .manage-students-btn {
   background-color: #9C27B0;
   color: white;

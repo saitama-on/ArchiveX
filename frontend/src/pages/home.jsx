@@ -13,6 +13,8 @@ import { API_URL } from '../const';
 
 const Home = () => {
   const [userProjects, setUserProjects] = useState(null);
+  const [approvedProjects , setApprovedProjects] = useState(null);
+  const [pendingProjects , setPendingProjects] = useState(null);
   const [allUsers , setAllUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -65,6 +67,10 @@ const Home = () => {
             //     newprojs.push(curr);
             // }
             setUserProjects(projs.data);
+            const approved = projs.data.filter(proj => proj.isApproved === true);
+            const pending = projs.data.filter(proj => proj.isApproved === false);
+            setApprovedProjects(approved);
+            setPendingProjects(pending);
             // console.log(projs.data)
             }
             catch(err){
@@ -149,11 +155,13 @@ const Home = () => {
       <div className="projects-section">
         <div className="projects-type-slider">
           <h2 style={{textDecoration:pendingApprovalSelected ? 'none' : 'underline',
-            cursor:'pointer' , textDecorationColor:pendingApprovalSelected ? 'none' : '#519fe9ff'
+            cursor:'pointer' , textDecorationColor:pendingApprovalSelected ? 'none' : '#519fe9ff',
+            opacity:pendingApprovalSelected? '0.5' : '1'
           }} 
           onClick={()=>setPendingApprovalSelected(false)}>Your Projects</h2>
           <h2 style={{textDecoration:pendingApprovalSelected ? 'underline' : 'none',
-            cursor:'pointer',textDecorationColor:pendingApprovalSelected ? '#519fe9ff' : 'none'
+            cursor:'pointer',textDecorationColor:pendingApprovalSelected ? '#519fe9ff' : 'none',
+            opacity:pendingApprovalSelected? '1' : '0.5'
           }}
           onClick={()=>setPendingApprovalSelected(true)}>Pending for Approval</h2>
         </div>
@@ -162,7 +170,7 @@ const Home = () => {
           <div className="loading">Loading projects...</div>
         ) : userProjects? (
           <div className="projects-grid">
-            {userProjects.map((project ,key) => (
+            {(pendingApprovalSelected ? pendingProjects : approvedProjects).map((project ,key) => (
               <ProjectCard 
               key={key}
               project={project} 

@@ -32,7 +32,8 @@ const createNewProject = asyncHandler(async(req,res)=>{
             semester,
             researchArea,
             projLink,
-            likes
+            likes,
+            isApproved:false
 
         })
 

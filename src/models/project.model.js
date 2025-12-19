@@ -52,7 +52,12 @@ const ProjectSchema = new Schema (
                 type: Schema.Types.ObjectId,
                 ref:'User'
             }
-        ]
+        ],
+
+        isApproved:{
+            type:Boolean,
+            required:true
+        }
         
         
         

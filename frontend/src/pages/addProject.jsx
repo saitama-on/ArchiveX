@@ -311,7 +311,7 @@ const AddProject = () => {
             </div>
           ) : (
             <button type="button" onClick={handleAddMember} className="add-member">
-              Send for Approval
+              Add Member
             </button>
           )}
         </div>
@@ -322,7 +322,7 @@ const AddProject = () => {
 
         <button type="button" className="submit-button" onClick={handleSubmit}>
           {/* {loading ? 'Adding Project...' : 'Add Project'} */}
-          Add Project
+          Send for Approval
         </button>
         </div>
       <div class="file-preview">
